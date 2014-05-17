@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('fchallengeApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $http) {
+    $http.get('/url', function () {
+    });
   });

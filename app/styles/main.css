@@ -77,3 +77,11 @@ body {
     border-bottom: 0;
   }
 }
+
+svg {
+  background: black;
+}
+
+circle#death {
+  fill: #cdcdcd;
+}
