@@ -8,6 +8,7 @@
   font-family: "STARWARS";
   color: #E2D816;
   font-size: 5em;
+  text-shadow: 1px 1px 8px #777;
 }
 
 /* Space out content a bit */
@@ -98,10 +99,6 @@ body {
   }
 }
 
-svg {
-  background: rgba(0,0,0,0);
-}
-
 .death {
   fill: #cdcdcd;
   border: 1px solid white;
@@ -110,6 +107,8 @@ svg {
 visualization{
   position: absolute;
   border: none;
+  background: rgba(0, 0 , 0, 0.8);
+  border-radius: 6px;
 }
 .dstar{
   padding-top: 2em;
@@ -117,6 +116,14 @@ visualization{
   float: right;
   position: relative;
   z-index: -3;
+  -webkit-backface-visibility: hidden;
+}
+.dstar {
+-webkit-animation: cssAnimation 1s 1 ease;
+}
+@-webkit-keyframes cssAnimation {
+from { -webkit-transform: scale(0.4); }
+to { -webkit-transform: scale(1); }
 }
 
 
