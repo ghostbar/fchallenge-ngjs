@@ -11,8 +11,7 @@ angular.module('fchallengeApp')
     return {
       restrict: 'E',
       scope: {
-        val: '=',
-        grouped: '='
+        val: '='
       },
       link: function postLink(scope, element, attrs) {
         var vis = d3.select(element[0]).
@@ -33,6 +32,8 @@ angular.module('fchallengeApp')
 
         function renderComet (ele) {
           vis.select('circle#c'+ele.id)
+          .data([1])
+          .enter()
           .attr("cx", ele.x)
           .attr("cy", ele.y)
           .attr("r", ele.r)
@@ -41,6 +42,8 @@ angular.module('fchallengeApp')
 
         function renderOther (ele) {
           vis.select('circle#o'+ele.id)
+          .data([1])
+          .enter()
           .attr("cx", ele.x)
           .attr("cy", ele.y)
           .attr("r", ele.r)
@@ -49,16 +52,31 @@ angular.module('fchallengeApp')
 
         function renderMeteor (ele) {
           vis.select('circle#m'+ele.id)
+          .data([1])
+          .enter()
           .attr("cx", ele.x)
           .attr("cy", ele.y)
           .attr("r", ele.r)
           .attr("class", "meteor")
         }
         renderDeath();
-        scope.$watch('val', function (newVal, oldVal) {
-          newVal.forEach(function(element, index){
+        scope.$watch('val', function (newVal) {
+          if (newVal) {
+            newVal.forEach(function (element, idx) {
+              console.log(element);
+              if (element.type === 'O') {
+                renderOther(element);
+              }
+              
+              if (element.type === 'C') {
+                renderComet(element);
+              }
 
-          })
+              if (element.type === 'M') {
+                renderMeteor(element);
+              }
+            });
+          }
         });
       }
     };
