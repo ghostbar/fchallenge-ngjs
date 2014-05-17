@@ -1,7 +1,27 @@
+﻿@font-face {
+  font-family: "STARWARS";
+  src: url("STARWARS.eot?") format("eot"),url("../fonts/STARWARS.woff") format("woff"),url("../fonts/STARWARS.ttf") format("truetype"),url("../fonts/STARWARS.svg#STARWARS") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+.title{
+  font-family: "STARWARS";
+  color: #E2D816;
+  font-size: 5em;
+}
+
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 0;
+  margin: 0;
+  background-color:black;
+  background-image:
+  radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+  radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+  radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+  radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px; 
+  background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -84,4 +104,16 @@ svg {
 
 circle#death {
   fill: #cdcdcd;
+}
+visualization{
+  position: absolute;
+  border: none;
+  box-shadow: 0px 0px 20px 0px rgba(55,132,214, 1);
+}
+.dstar{
+  padding-top: 2em;
+  left: 8em;
+  float: right;
+  position: relative;
+  z-index: -3;
 }
