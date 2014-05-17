@@ -99,12 +99,13 @@ body {
 }
 
 svg {
-  background: black;
+  background: blue;
 }
 
 circle#death {
   fill: #cdcdcd;
 }
+
 visualization{
   position: absolute;
   border: none;
@@ -117,3 +118,17 @@ visualization{
   position: relative;
   z-index: -3;
 }
+
+
+.meteor {
+  fill: #9b59b6;
+}
+
+.comet {
+  fill: white;
+}
+
+.other {
+  fill: #2ecc71;
+}
+
