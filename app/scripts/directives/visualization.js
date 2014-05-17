@@ -19,20 +19,8 @@ angular.module('fchallengeApp')
           attr('width', width).
           attr('height', height);
 
-        function renderDeath () {
-          vis.selectAll('circle#death').
-            data([1000]).
-            enter().
-            append('circle').
-            attr('id', 'death').
-            attr('cx', 300).
-            attr('cy', 300).
-            attr('r', 8);
-        }
-
         var circles;
 
-        renderDeath();
         scope.$watch('val', function (newVal, oldVal) {
 
           if (!newVal) {
@@ -47,8 +35,6 @@ angular.module('fchallengeApp')
               enter().
               append('circle');
           }
-
-          //vis.selectAll('circle').remove();
 
           circles.
             data(newVal).
@@ -69,7 +55,12 @@ angular.module('fchallengeApp')
             attr('cx', function (d) { return d.x; }).
             attr('cy', function (d) { return d.y; }).
             attr('r', multiplierFunc).
-            order(function (d) { return d.z; });
+            sort(function (a, b) {
+              if (a > b)
+                return 1;
+
+              return -1;
+            });
 
             function multiplierFunc (d) {
               if (d.type === 'death')
