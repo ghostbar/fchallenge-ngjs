@@ -56,11 +56,12 @@ angular.module('fchallengeApp')
             attr('cy', function (d) { return d.y; }).
             attr('r', multiplierFunc).
             sort(function (a, b) {
-              if (a > b)
+              if (a.z > b.z)
                 return 1;
 
               return -1;
-            });
+            }).
+            ascending();
 
             function multiplierFunc (d) {
               if (d.type === 'death')
@@ -70,9 +71,9 @@ angular.module('fchallengeApp')
               if (d.type === 'M')
                 multiplier = 0.016;
               if (d.type === 'O')
-                multiplier = 0.025;
+                multiplier = 0.03;
               if (d.type === 'C')
-                multiplier = 0.02;
+                multiplier = 0.05;
 
               return d.z * multiplier;
             }

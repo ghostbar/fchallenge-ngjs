@@ -50,13 +50,6 @@ app.get('/data.json', function (req, res) {
       };
 
       if (i === data.length - 1) {
-        data.push({
-          id: 1000,
-          type: 'death',
-          x: 100000,
-          y: 100000,
-          z: 100000
-        });
         return cb();
       }
     }
@@ -95,10 +88,12 @@ app.get('/data.json', function (req, res) {
       return e.z;
     });
 
+    data.splice(data.length / 2, 0, {type: 'death', x: 300, y: 300, z: 300});
+
     return cb();
   }
 
-  async.waterfall([getData, runData, restruct], function () {
+  async.waterfall([getData, runData, restruct, reorganize], function () {
     counter += 1;
     console.log(data);
     res.send(data);
