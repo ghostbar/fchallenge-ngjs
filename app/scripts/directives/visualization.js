@@ -21,7 +21,7 @@ angular.module('fchallengeApp')
 
         function renderDeath () {
           vis.selectAll('circle#death').
-            data([1]).
+            data([1000]).
             enter().
             append('circle').
             attr('id', 'death').
@@ -32,48 +32,46 @@ angular.module('fchallengeApp')
 
         function renderComet (ele) {
           vis.select('circle#c'+ele.id)
-          .data([1])
+          .data(ele.id)
           .enter()
-          .attr("cx", ele.x)
-          .attr("cy", ele.y)
-          .attr("r", ele.r)
-          .attr("class", "comet")
+          .append('circle')
+          .attr('id', 'c' + ele.id)
+          .attr('cx', ele.x)
+          .attr('cy', ele.y)
+          .attr('r', ele.r)
+          .attr('class', 'comet');
         }
 
         function renderOther (ele) {
           vis.select('circle#o'+ele.id)
-          .data([1])
+          .data([ele.id])
           .enter()
-          .attr("cx", ele.x)
-          .attr("cy", ele.y)
-          .attr("r", ele.r)
-          .attr("class", "other")
+          .append('circle')
+          .attr('id', 'o' + ele.id)
+          .attr('cx', ele.x)
+          .attr('cy', ele.y)
+          .attr('r', ele.z * 0.035)
+          .attr('class', 'other');
         }
 
         function renderMeteor (ele) {
-          vis.select('circle#m'+ele.id)
-          .data([1])
-          .enter()
-          .attr("cx", ele.x)
-          .attr("cy", ele.y)
-          .attr("r", ele.r)
-          .attr("class", "meteor")
+          vis.selectAll('circle#m' + ele.id).
+            data([0]).
+            enter().
+            append('circle').
+            attr('id', 'm' + ele.id).
+            attr('cx', ele.x).
+            attr('cy', ele.y).
+            attr('r', 4).
+            attr('class', 'meteor');
         }
         renderDeath();
         scope.$watch('val', function (newVal) {
           if (newVal) {
             newVal.forEach(function (element, idx) {
-              console.log(element);
               if (element.type === 'O') {
                 renderOther(element);
-              }
-              
-              if (element.type === 'C') {
-                renderComet(element);
-              }
-
-              if (element.type === 'M') {
-                renderMeteor(element);
+                console.log(element);
               }
             });
           }
