@@ -71,7 +71,7 @@ app.get('/data.json', function (req, res) {
 
       c += 1;
 
-      if (c === data.length - 1) {
+      if (c === data.length) {
         return cb();
       }
     });
