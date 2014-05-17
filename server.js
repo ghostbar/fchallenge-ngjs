@@ -26,10 +26,16 @@ var string = file.toString().split('\n');
 var counter = 0;
 
 app.get('/data.json', function (req, res) {
-  var data = string[counter];
+  var data;
   var async = require('async');
-  data = data.split(';');
-  data = data.slice(1);
+  var request = require('request');
+
+  function getData (cb) {
+    request('http://50.23.68.34:3000/?star=jose', function (err, response, body) {
+      data = body.split(';').splice(1);
+      return cb();
+    });
+  }
  
   function runData (cb) {
     for (var i = 0; i < data.length; i++) {
@@ -44,6 +50,13 @@ app.get('/data.json', function (req, res) {
       };
 
       if (i === data.length - 1) {
+        data.push({
+          id: 1000,
+          type: 'death',
+          x: 100000,
+          y: 100000,
+          z: 100000
+        });
         return cb();
       }
     }
@@ -85,7 +98,7 @@ app.get('/data.json', function (req, res) {
     return cb();
   }
 
-  async.waterfall([runData, restruct, reorganize], function () {
+  async.waterfall([getData, runData, restruct], function () {
     counter += 1;
     console.log(data);
     res.send(data);

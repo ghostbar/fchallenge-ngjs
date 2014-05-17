@@ -30,51 +30,61 @@ angular.module('fchallengeApp')
             attr('r', 8);
         }
 
-        function renderComet (ele) {
-          vis.select('circle#c'+ele.id)
-          .data(ele.id)
-          .enter()
-          .append('circle')
-          .attr('id', 'c' + ele.id)
-          .attr('cx', ele.x)
-          .attr('cy', ele.y)
-          .attr('r', ele.r)
-          .attr('class', 'comet');
-        }
+        var circles;
 
-        function renderOther (ele) {
-          vis.select('circle#o'+ele.id)
-          .data([ele.id])
-          .enter()
-          .append('circle')
-          .attr('id', 'o' + ele.id)
-          .attr('cx', ele.x)
-          .attr('cy', ele.y)
-          .attr('r', ele.z * 0.035)
-          .attr('class', 'other');
-        }
-
-        function renderMeteor (ele) {
-          vis.selectAll('circle#m' + ele.id).
-            data([0]).
-            enter().
-            append('circle').
-            attr('id', 'm' + ele.id).
-            attr('cx', ele.x).
-            attr('cy', ele.y).
-            attr('r', 4).
-            attr('class', 'meteor');
-        }
         renderDeath();
-        scope.$watch('val', function (newVal) {
-          if (newVal) {
-            newVal.forEach(function (element, idx) {
-              if (element.type === 'O') {
-                renderOther(element);
-                console.log(element);
-              }
-            });
+        scope.$watch('val', function (newVal, oldVal) {
+
+          if (!newVal) {
+            return;
           }
+
+          if (!oldVal) {
+            console.log('se lanzo');
+
+            circles = vis.selectAll('circle').
+              data(newVal).
+              enter().
+              append('circle');
+          }
+
+          //vis.selectAll('circle').remove();
+
+          circles.
+            data(newVal).
+            attr('class', function (d) {
+              if (d.type === 'M')
+                return 'meteor';
+
+              if (d.type === 'O')
+                return 'other';
+
+              if (d.type === 'C')
+                return 'comet';
+
+              if (d.type === 'death')
+                return 'death';
+            }).
+            transition().duration(1500).delay(250).
+            attr('cx', function (d) { return d.x; }).
+            attr('cy', function (d) { return d.y; }).
+            attr('r', multiplierFunc);
+
+            function multiplierFunc (d) {
+              if (d.type === 'death')
+                return 24;
+
+              var multiplier;
+              if (d.type === 'M')
+                multiplier = 0.016;
+              if (d.type === 'O')
+                multiplier = 0.025;
+              if (d.type === 'C')
+                multiplier = 0.02;
+
+              return d.z * multiplier;
+            }
+
         });
       }
     };
