@@ -31,18 +31,34 @@ angular.module('fchallengeApp')
             attr('r', 8);
         }
 
-        function renderComet () {
-          vis.selectAll('circle').
-            data();
+        function renderComet (ele) {
+          vis.select('circle#c'+ele.id)
+          .attr("cx", ele.x)
+          .attr("cy", ele.y)
+          .attr("r", ele.r)
+          .attr("class", "comet")
         }
 
-        function renderOther () {
+        function renderOther (ele) {
+          vis.select('circle#o'+ele.id)
+          .attr("cx", ele.x)
+          .attr("cy", ele.y)
+          .attr("r", ele.r)
+          .attr("class", "other")
         }
 
-        function renderMeteor () {
+        function renderMeteor (ele) {
+          vis.select('circle#m'+ele.id)
+          .attr("cx", ele.x)
+          .attr("cy", ele.y)
+          .attr("r", ele.r)
+          .attr("class", "meteor")
         }
-
+        renderDeath();
         scope.$watch('val', function (newVal, oldVal) {
+          newVal.forEach(function(element, index){
+
+          })
         });
       }
     };
