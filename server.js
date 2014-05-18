@@ -36,6 +36,12 @@ app.get('/data.json', function (req, res) {
       return cb();
     });
   }
+
+  function getDataFile (cb) {
+    data = string[counter].split(';').splice(1);
+    counter += 1;
+    return cb();
+  }
  
   function runData (cb) {
     for (var i = 0; i < data.length; i++) {
@@ -93,7 +99,7 @@ app.get('/data.json', function (req, res) {
     return cb();
   }
 
-  async.waterfall([getData, runData, restruct, reorganize], function () {
+  async.waterfall([getDataFile, runData, restruct, reorganize], function () {
     counter += 1;
     console.log(data);
     res.send(data);
