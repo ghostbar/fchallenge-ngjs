@@ -139,3 +139,12 @@ to { -webkit-transform: scale(1); }
   fill: #2ecc71;
 }
 
+input[type='text'] {
+  background: none;
+  border: 1px solid white;
+  color: white;
+}
+
+label {
+  color: white;
+}
