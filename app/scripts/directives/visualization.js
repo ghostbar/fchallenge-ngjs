@@ -51,7 +51,7 @@ angular.module('fchallengeApp')
               if (d.type === 'death')
                 return 'death';
             }).
-            transition().duration(1500).delay(250).
+            transition().duration(1500).delay(0).
             attr('cx', function (d) { return d.x; }).
             attr('cy', function (d) { return d.y; }).
             attr('r', multiplierFunc).
